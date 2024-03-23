@@ -85,6 +85,7 @@
                 success: function(data) {
                     console.log(data); // display response from the PHP script, if any
                     downloadImage(data);
+                    excluirImagem(data);
                 }
             });
         })
@@ -110,6 +111,25 @@
             };
 
             xhr.send();
+        }
+        // function nomeFromPath(path){
+        //     return path.substr(path.lastIndexOf('/') + 1)
+        // }
+        function excluirImagem(path){
+           
+            $.ajax({
+                url: 'ExcluirImagem.php',
+                type: 'DELETE',
+                data:{
+                    nomeDaImagem: path,
+                },
+                success: function(response){
+                    console.log(response);
+                },
+                error: function(xhr,status,error){
+                    console.log(xhr.responseText);
+                }
+            })
         }
     </script>
 
