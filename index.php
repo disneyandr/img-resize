@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<link rel="stylesheet" href="style.css">
 
 <head>
     <meta charset="UTF-8">
@@ -10,37 +11,6 @@
             font-family: Arial, sans-serif;
         }
 
-        .form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        input[type="file"],
-        input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        input[type="button"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
 
         #download-btn {
             display: none;
@@ -50,16 +20,24 @@
 </head>
 
 <body>
+    <div class="container">
 
-    <div class="form" id="image-form">
-        
-        <label for="imagem">Selecione uma Imagem:</label>
-        <input type="file" id="imagem" name="imagem" accept="image/jpeg, image/gif, image/png" required>
+        <div class="form-container">
 
-        <label for="largura">Largura da Imagem (em pixels):</label>
-        <input type="number" id="largura" name="largura" min="1" required>
+            <div class="form" id="image-form">
+                <div class="form-group">
 
-        <input type="button" id="submit-btn" value="Redimensionar Imagem">
+                    <label for="imagem">Selecione uma Imagem:</label>
+                    <input type="file" id="imagem" name="imagem" accept="image/jpeg, image/gif, image/png" required>
+                </div>
+                <div class="form-group">
+                    <!-- <label for="largura">Largura da Imagem (em pixels):</label> -->
+                    <input type="number" id="largura" name="largura" min="1" required placeholder="Largura da imagem (em pixel)">
+
+                    <input type="button" id="submit-btn" value="Redimensionar Imagem">
+                </div>
+            </div>
+        </div>
     </div>
 
     <button id="download-btn">Baixar Imagem Redimensionada</button>
@@ -115,18 +93,18 @@
         // function nomeFromPath(path){
         //     return path.substr(path.lastIndexOf('/') + 1)
         // }
-        function excluirImagem(path){
-           
+        function excluirImagem(path) {
+
             $.ajax({
                 url: 'ExcluirImagem.php',
                 type: 'DELETE',
-                data:{
+                data: {
                     nomeDaImagem: path,
                 },
-                success: function(response){
+                success: function(response) {
                     console.log(response);
                 },
-                error: function(xhr,status,error){
+                error: function(xhr, status, error) {
                     console.log(xhr.responseText);
                 }
             })
